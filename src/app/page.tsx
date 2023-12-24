@@ -1,95 +1,96 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import { useEffect, useState } from "react";
+import { SignatureDialog } from "app/components/Dialog/SignatureDialog";
+import styles from "./page.module.sass";
+import { AlertDialog } from "app/components/Dialog/AlertDialog";
+import { useMobile } from "app/hooks/useMobile";
+import { StepsContext } from "app/context/stepsContext";
+import { useContext } from "react";
+import { Worker, Viewer } from "@react-pdf-viewer/core";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 export default function Home() {
+  const [openAlert, setOpenAlert] = useState(false);
+  const [openSignature, setOpenSignature] = useState(false);
+  const { height, width } = useMobile();
+  const [pdf, setPdf] = useState();
+  const steps = useContext(StepsContext);
+
+  const urlPdf = (pdf: any) => {
+    if (pdf) {
+      const url = URL.createObjectURL(pdf);
+      console.log(url);
+    }
+  };
+
+  const handleClickOpen = (key?: string) => {
+    if (key === "alert") {
+      setOpenAlert(true);
+    } else {
+      setOpenSignature(true);
+    }
+  };
+
+  const uploadPdf = (e) => {
+    const pdfData = e.target.files[0];
+    const url = URL.createObjectURL(pdfData);
+    setPdf(url);
+  };
+
+  const handleClose = (key?: string) => {
+    if (key === "alert") {
+      setOpenAlert(false);
+    } else {
+      setOpenSignature(false);
+    }
+  };
+
+  useEffect(() => {
+    if (steps.data.signatureValue) {
+      setOpenAlert(true);
+    }
+  }, [openSignature]);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className={styles.MainContent}>
+      <section className={styles.sectionStyle}>
+        <div className={styles.LeftSide}>
+          <input onChange={uploadPdf} type="file" />
+          {pdf && (
+            <Worker
+              workerUrl={`https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js`}
+            >
+              <Viewer fileUrl={pdf} />
+            </Worker>
+          )}
         </div>
-      </div>
+        {width >= 1120 && (
+          <aside className={styles.RightSide}>
+            <div className={styles.Box}>
+              <div className={styles.FirstSectionBox}>
+                <p>Revisa y tus documentos</p>
+                <div>
+                  <p>Contrato laboral</p>
+                  <div></div>
+                  <span>3 páginas</span>
+                </div>
+              </div>
+              <div className={styles.SecondSectionBox}>
+                <button onClick={handleClickOpen}>Firmar documento</button>
+              </div>
+            </div>
+          </aside>
+        )}
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+        {width <= 1119 && (
+          <div className={styles.ButtonMobile}>
+            <button onClick={() => handleClickOpen()}>Firmar documento</button>
+          </div>
+        )}
+      </section>
+      <AlertDialog open={openAlert} handleClose={() => handleClose("alert")} />
+      <SignatureDialog open={openSignature} handleClose={handleClose} />
     </main>
-  )
+  );
 }

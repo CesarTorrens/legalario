@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const path = require("path");
+const nextConfig = {
+  webpack: (config) => {
+    config.resolve.alias.canvas = false;
 
-module.exports = nextConfig
+    return config;
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, "src/sass")],
+    prependData: `@import "main.sass"`,
+  },
+};
+
+module.exports = nextConfig;

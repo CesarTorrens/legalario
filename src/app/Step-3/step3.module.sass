@@ -1,0 +1,52 @@
+.Main
+    height: calc(100vh - 106px)
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding-top: 50px
+    @media (max-width: 1120px)
+        padding: 0px 27px
+    & .title
+        color: $color-secondary
+        font-size: 18px
+        font-weight: 600
+        line-height: 22px
+        letter-spacing: -0.408px
+        margin: 0
+        margin-top: 24px
+        margin-bottom: 16px
+    & .subTitle
+        color: $color-secondary
+        max-width: 296px
+        font-size: 14px
+        font-weight: 400
+        opacity: 0.6
+        text-align: center
+        margin: 0
+        margin-bottom: 44px
+
+.ContentBlue
+    max-width: 380px
+    display: flex
+    gap: 10px
+    font-size: 14px
+    padding: 10px 16px
+    background: rgba(36, 129, 255, 0.05)
+    border-radius: 4px
+    line-height: 22px
+    border: 1px solid #2481FF
+    & > svg
+        min-width: 24px
+
+.buttonContinue
+    background: $color-button
+    font-size: 16px
+    color: white
+    max-width: 300px
+
+    padding: 9px 14px
+    line-height: 26px
+    font-weight: 600
+    border-radius: 5px
+    border: none
+    cursor: pointer

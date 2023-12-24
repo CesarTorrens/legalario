@@ -1,0 +1,107 @@
+.MainContent
+    background: $bg-pdf-section
+    max-width: $global-width-page
+    margin: 0 auto
+    & > section
+        padding-left: 72px
+        display: flex
+        @media (max-width: 1119px)
+            padding-left: 0px
+
+.sectionStyle
+    @media (max-width: 1119px)
+        position: relative
+
+.LeftSide
+    width: 70%
+    padding-top: 50px
+    height: calc(100vh - 106px)
+    overflow: auto
+    & > div
+        height: auto !important
+    @media (max-width: 1119px)
+        width: 100%
+        padding-left: 17px
+        padding-right: 17px
+
+.RightSide
+    padding: 40px 50px 0px 50px
+    background: $bg-right-section
+    width: 30%
+
+.Box
+    background: white
+    border: 0.5px solid #D9D9D9
+    border-radius: 4px
+
+.FirstSectionBox
+    padding: 32px 32px 25px 32px
+    border-bottom: 0.5px solid #D9D9D9
+    & > p
+        margin: 0
+        color: $color-secondary
+        font-size: 20px
+        font-weight: 600
+    & > div
+        margin-top: 16px
+        display: flex
+        gap: 8px
+        align-items: center
+        & > div
+            width: 1px
+            height: 21px
+            background: #E9E9E9
+        & > p
+            font-weight: 600
+            font-size: 16px
+            margin: 0
+            color: $color-secondary
+            opacity: 0.8
+        & > span
+            font-weight: 400
+            font-size: 16px
+            color: $color-secondary
+            opacity: 0.4
+
+.SecondSectionBox
+    text-align: center
+    padding: 0px 32px
+    & > button
+        background: $color-button
+        font-size: 16px
+        color: white
+        width: 100%
+        margin-top: 24px
+        margin-bottom: 26px
+        line-height: 26px
+        font-weight: 600
+        padding: 12px 0px
+        border-radius: 5px
+        border: none
+        cursor: pointer
+
+.ButtonMobile
+    background: white
+    height: fit-content
+    padding: 17px 0px
+    width: 100%
+    position: fixed
+    bottom: 0
+    box-shadow: 0px 4px 12px 0px rgba(1, 27, 52, 0.16)
+    border-radius: 6px 6px 0px 0px
+    & > button
+        padding: 16px 0px
+        background: $color-button
+        font-size: 16px
+        color: white
+        width: 100%
+        line-height: 26px
+        font-weight: 600
+        border-radius: 5px
+        border: none
+
+.rpv-default-layout__toolbar
+    display: none !important
+
+.rpv-core__viewer
+    height: auto

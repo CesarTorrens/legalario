@@ -1,0 +1,98 @@
+.MainContent
+    display: flex
+    flex-direction: column
+    gap: 32px
+    align-items: center
+    min-width: 360px
+    & > div
+        text-align: center
+        & > p
+            font-size: 23px
+            font-weight: 600
+            color: $color-secondary
+            margin: 0
+            margin-bottom: 12px
+        & > span
+            font-size: 16px
+            font-weight: 400
+            color: $color-secondary
+
+.buttonContinue
+    background: $color-button
+    font-size: 16px
+    color: white
+    width: 100%
+    padding: 9px 14px
+    line-height: 26px
+    font-weight: 600
+    border-radius: 5px
+    border: none
+    cursor: pointer
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 5px
+
+.imgContainer
+    position: relative
+    width: 251px
+    height: 350px
+    border-radius: 100%
+    & > img
+        object-fit: cover
+        object-position: -90px 0px
+        border-radius: 100%
+
+.videoContainer
+    width: 251px
+    height: 350px
+    border-radius: 100%
+    & > video
+        width: 251px
+        height: 350px
+        object-fit: cover
+        object-position: -90px 0px
+        border-radius: 100%
+
+.canvasContainer
+    max-width: 251px
+    max-height: 350px
+    border-radius: 100%
+    & > img
+        width: 251px
+        height: 350px
+        object-fit: cover
+        object-position: -90px 0px
+        border-radius: 100%
+
+.textWithPermission
+    font-size: 22px
+    font-weight: 600
+    line-height: 30px
+    color: $color-secondary
+    mix-blend-mode: luminosity
+    margin: 0
+    margin-bottom: 33px
+
+.newPicturesButtons
+    display: flex
+    gap: 10px
+    width: 100%
+    & .ButtonBack
+        background: transparent
+        border: none
+        display: flex
+        align-items: center
+        width: 100%
+        cursor: pointer
+        gap: 5px
+        font-size: 16px
+        border-radius: 5px
+        font-weight: 500
+        line-height: 22px
+        color: $color-button
+    & .nextButton
+        background: transparent
+        border: none
+        display: flex
+        align-items: center
