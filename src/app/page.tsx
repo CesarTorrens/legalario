@@ -14,7 +14,7 @@ export default function Home() {
   const [openAlert, setOpenAlert] = useState(false);
   const [openSignature, setOpenSignature] = useState(false);
   const { height, width } = useMobile();
-  const [pdf, setPdf] = useState();
+  const [pdf, setPdf] = useState<string | null>();
   const steps = useContext(StepsContext);
 
   const urlPdf = (pdf: any) => {
@@ -32,7 +32,7 @@ export default function Home() {
     }
   };
 
-  const uploadPdf = (e) => {
+  const uploadPdf = (e: any) => {
     const pdfData = e.target.files[0];
     const url = URL.createObjectURL(pdfData);
     setPdf(url);
