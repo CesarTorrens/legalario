@@ -4,7 +4,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./AlertDialog.module.sass";
-import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { StepsContext } from "app/context/stepsContext";
 
@@ -13,14 +12,13 @@ export const AlertDialog = (props: {
   handleClose: () => void;
 }) => {
   const { open, handleClose } = props;
-  const router = useRouter();
   const [politiesCheck, setPolitiesCheck] = React.useState(false);
   const steps = useContext(StepsContext);
 
   const handleSubmit = () => {
     if (politiesCheck) {
-      steps.handleCount();
-      router.push("/Step-2");
+      steps.saveData("checkPolitiesValue", true);
+      handleClose();
     }
   };
   const handleCheck = (e: any) => {

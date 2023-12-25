@@ -4,7 +4,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./AlertDialog.module.sass";
-import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import { StepsContext } from "app/context/stepsContext";
 import { DigitalSignature } from "../DigitalSignature/DigitalSignature";
@@ -14,8 +13,6 @@ export const SignatureDialog = (props: {
   handleClose: () => void;
 }) => {
   const { open, handleClose } = props;
-  const router = useRouter();
-  const [politiesCheck, setPolitiesCheck] = React.useState(false);
   const [signature, setSignature] = useState("");
   const steps = useContext(StepsContext);
 

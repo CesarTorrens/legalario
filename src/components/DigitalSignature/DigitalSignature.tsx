@@ -1,11 +1,15 @@
 import SignatureCanvas from "react-signature-canvas";
 import { useRef, useState, useEffect } from "react";
+import styles from "./DigitalSignature.module.sass";
+import { useContext } from "react";
+import { StepsContext } from "app/context/stepsContext";
 
 export const DigitalSignature = (props: any) => {
   const { setSignature } = props;
   const signatureRef = useRef<any>({});
   const [imageData, setImageData] = useState<string | null>("");
   const [error, setError] = useState(true);
+  const steps = useContext(StepsContext);
 
   const saveSignature = (signature: string | null) => {
     setImageData(signature);
@@ -33,6 +37,7 @@ export const DigitalSignature = (props: any) => {
         }}
       />
       <button
+        className={styles.ClearButton}
         onClick={() => {
           signatureRef.current.clear();
           saveSignature(null);
@@ -41,7 +46,10 @@ export const DigitalSignature = (props: any) => {
         {" "}
         Limpiar firma{" "}
       </button>
-      <pre>{error ? <div>La firma es obligatoria</div> : false}</pre>
+      <pre className={styles.Error}>
+        {error ? <div>La firma es obligatoria</div> : false}
+      </pre>
+      {/* <span>{imageData}</span> */}
     </>
   );
 };

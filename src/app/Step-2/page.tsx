@@ -1,20 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styles from "./step2.module.sass";
 import { Capture } from "app/components/CaptureComponent/Capture";
+import { useContext } from "react";
+import { StepsContext } from "app/context/stepsContext";
 
 export default function Step2() {
-  const [open, setOpen] = useState(false);
+  const steps = useContext(StepsContext);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  if (!steps.shouldRenderStep2) {
+    return null;
+  }
   return (
-    <main className={styles.Main}>
+    <main
+      className={!steps.permission ? styles.Main : styles.MainContentMobile}
+    >
       <Capture />
     </main>
   );

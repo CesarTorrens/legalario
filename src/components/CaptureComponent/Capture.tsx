@@ -2,7 +2,6 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import styles from "./capture.module.sass";
-import { useRouter } from "next/navigation";
 import { StepsContext } from "app/context/stepsContext";
 import { useContext } from "react";
 
@@ -14,12 +13,10 @@ export const Capture = () => {
   const refPhoto = useRef<null | HTMLImageElement>(null);
   const [srcPhoto, setSrcPhoto] = useState<string>("");
   const steps = useContext(StepsContext);
-  const router = useRouter();
 
   const handleSubmit = () => {
     if (srcPhoto) {
-      steps.handleCount();
-      router.push("/Step-3");
+      steps.saveData("photoValue", srcPhoto);
     }
   };
 
@@ -32,6 +29,7 @@ export const Capture = () => {
         },
       });
       setPermission(true);
+      steps.handlePermission();
       if (refVideo.current) {
         refVideo.current.srcObject = stream;
       }
@@ -82,7 +80,7 @@ export const Capture = () => {
       </div>
       <div
         style={{
-          display: `${permission ? "block" : "none"}`,
+          display: `${permission && srcPhoto ? "block" : "none"}`,
         }}
       >
         <canvas

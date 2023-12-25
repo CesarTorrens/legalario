@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./step3.module.sass";
-import { useRouter } from "next/navigation";
+import { StepsContext } from "app/context/stepsContext";
+import { useContext } from "react";
 
 export default function Step3() {
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
+  const steps = useContext(StepsContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -15,13 +15,13 @@ export default function Step3() {
     }, 3000);
   }, []);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const backToHome = (): void => {
+    steps.clearData();
   };
+  if (!steps.shouldRenderStep3) {
+    return null;
+  }
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
     <main className={styles.Main}>
       {loading && (
@@ -69,10 +69,7 @@ export default function Step3() {
           </svg>
 
           <p className={styles.title}>Datos procesados correctamente</p>
-          <button
-            onClick={() => router.push("/")}
-            className={styles.buttonContinue}
-          >
+          <button onClick={backToHome} className={styles.buttonContinue}>
             Firmar otro documento
           </button>
         </>

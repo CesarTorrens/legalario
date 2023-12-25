@@ -5,10 +5,28 @@
     margin: 0 auto
     justify-content: space-between
     align-items: center
-    & > div
+    & > .QRInput
         display: flex
         gap: 12px
         align-items: center
+        @media (max-width: 1120px)
+            display: none
+
+.HeaderMobile
+    display: flex
+    max-width: $global-width-page
+    padding: 10px 34px
+    color: white
+    margin: 0 auto
+    justify-content: space-between
+    align-items: center
+    @media (max-width: 1120px)
+        background: $color-bg-mobile
+        & > span
+            color: white
+    & > .QRInput
+        @media (max-width: 1120px)
+            display: none
 
 .text
     font-size: 14px
