@@ -24,7 +24,7 @@ export default function Home() {
     }
   };
 
-  const handleClickOpen = (key?: string) => {
+  const handleClickOpen = (key?: any) => {
     if (key === "alert") {
       setOpenAlert(true);
     } else {
