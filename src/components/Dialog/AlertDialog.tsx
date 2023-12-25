@@ -23,7 +23,7 @@ export const AlertDialog = (props: {
       router.push("/Step-2");
     }
   };
-  const handleCheck = (e) => {
+  const handleCheck = (e: any) => {
     setPolitiesCheck(e.target.checked);
   };
 

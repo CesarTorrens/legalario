@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 
 export const DigitalSignature = (props: any) => {
   const { setSignature } = props;
-  const signatureRef = useRef({});
+  const signatureRef = useRef<any>({});
   const [imageData, setImageData] = useState<string | null>("");
   const [error, setError] = useState(true);
 
