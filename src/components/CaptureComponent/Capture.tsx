@@ -3,7 +3,6 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import styles from "./capture.module.sass";
 import { useRouter } from "next/navigation";
-import { useMobile } from "app/hooks/useMobile";
 import { StepsContext } from "app/context/stepsContext";
 import { useContext } from "react";
 
@@ -14,7 +13,6 @@ export const Capture = () => {
   const refPicture = useRef<null | HTMLCanvasElement>(null);
   const refPhoto = useRef<null | HTMLImageElement>(null);
   const [srcPhoto, setSrcPhoto] = useState<string>("");
-  const { width, height } = useMobile();
   const steps = useContext(StepsContext);
   const router = useRouter();
 
