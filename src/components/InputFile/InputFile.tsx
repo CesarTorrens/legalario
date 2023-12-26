@@ -23,9 +23,11 @@ export function InputFile() {
   const [pdf, setPdf] = React.useState<string | null>();
 
   const uploadPdf = (e: any) => {
-    const pdfData = e.target.files[0];
-    const url = URL.createObjectURL(pdfData);
-    setPdf(url);
+    if (e.target.files[0]) {
+      const pdfData = e.target.files[0];
+      const url = URL.createObjectURL(pdfData);
+      setPdf(url);
+    }
   };
   React.useEffect(() => {
     steps.saveData("pdfValue", pdf);
