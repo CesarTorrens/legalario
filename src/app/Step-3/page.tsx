@@ -19,6 +19,10 @@ export default function Step3() {
     setEmail(e.target.value);
   };
 
+  const validate = () => {
+    return !email && regex.test(email);
+  };
+
   const sendDocument = () => {
     setLoading(true);
     setSendValue(false);
@@ -39,7 +43,7 @@ export default function Step3() {
         <div className={styles.InputContainer}>
           <p>Ingrese su correo para enviar su documento firmado.</p>
           <Input
-            error={email && !regex.test(email)}
+            error={!validate}
             onChange={handleEmail}
             sx={{
               width: "300px",
