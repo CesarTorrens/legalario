@@ -122,8 +122,8 @@ export const Capture = () => {
         }}
       >
         <canvas
-          width={800}
-          height={480}
+          width={refVideo.current?.videoWidth}
+          height={refVideo.current?.videoHeight}
           style={{
             display: `${!refPicture.current ? "block" : "none"}`,
           }}
