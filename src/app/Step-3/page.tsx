@@ -15,7 +15,7 @@ export default function Step3() {
   const [sendValue, setSendValue] = useState(true);
   const steps = useContext(StepsContext);
 
-  const handleEmail = (e) => {
+  const handleEmail = (e: any) => {
     setEmail(e.target.value);
   };
 
