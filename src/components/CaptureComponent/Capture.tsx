@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import styles from "./capture.module.sass";
 import { StepsContext } from "app/context/stepsContext";
@@ -56,10 +56,11 @@ export const Capture = () => {
       width: refVideo.current?.videoWidth as number,
       height: refVideo.current?.videoHeight as number,
     });
-    console.log(dimensions);
+
     const data = refPicture.current?.toDataURL();
     refPhoto.current?.setAttribute("src", data as string);
     setSrcPhoto(data as string);
+    console.log(srcPhoto);
     if (window.innerWidth <= 1120) {
       steps.handleBgBlue();
     }
@@ -127,12 +128,14 @@ export const Capture = () => {
       </div>
       <div
         style={{
-          display: `${permission && srcPhoto ? "block" : "none"}`,
+          display: `${
+            permission && srcPhoto && dimensions.width ? "block" : "none"
+          }`,
         }}
       >
         <canvas
-          width={640}
-          height={480}
+          width={dimensions.width}
+          height={dimensions.height}
           style={{
             display: `${!refPicture.current ? "block" : "none"}`,
           }}
