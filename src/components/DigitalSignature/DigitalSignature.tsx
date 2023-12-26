@@ -1,24 +1,18 @@
 import SignatureCanvas from "react-signature-canvas";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import styles from "./DigitalSignature.module.sass";
-import { useContext } from "react";
-import { StepsContext } from "app/context/stepsContext";
 
 export const DigitalSignature = (props: any) => {
   const { setSignature } = props;
   const signatureRef = useRef<any>({});
   const [imageData, setImageData] = useState<string | null>("");
   const [error, setError] = useState(true);
-  const steps = useContext(StepsContext);
 
   const saveSignature = (signature: string | null) => {
     setImageData(signature);
     setSignature(signature);
   };
 
-  //   useEffect(() => {
-  //     console.log(imageData);
-  //   }, [imageData]);
   return (
     <>
       <SignatureCanvas
@@ -49,7 +43,6 @@ export const DigitalSignature = (props: any) => {
       <pre className={styles.Error}>
         {error ? <div>La firma es obligatoria</div> : false}
       </pre>
-      {/* <span>{imageData}</span> */}
     </>
   );
 };

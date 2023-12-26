@@ -9,21 +9,11 @@ import { Worker, Viewer } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { InputFile } from "app/components/InputFile/InputFile";
-import { useSearchParams } from "next/navigation";
 
 export default function Home() {
   const [openAlert, setOpenAlert] = useState(false);
   const [openSignature, setOpenSignature] = useState(false);
-  const [loading, setLoading] = useState(true);
   const steps = useContext(StepsContext);
-  const searchParams = useSearchParams();
-  // console.log(searchParams.get("pdfValue"));
-  // useEffect(() => {
-  //   if (searchParams.get("pdfValue")) {
-  //     steps.saveData("pdfValue", searchParams.get("pdfValue"));
-  //   }
-  //   setLoading(false);
-  // }, []);
 
   const handleClickOpen = (key?: any) => {
     if (key === "alert") {
