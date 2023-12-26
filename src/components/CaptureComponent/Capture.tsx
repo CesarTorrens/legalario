@@ -9,6 +9,10 @@ export const Capture = () => {
   const [permission, setPermission] = useState(false);
   const refVideo = useRef<null | HTMLVideoElement>(null);
   const refPicture = useRef<null | HTMLCanvasElement>(null);
+  const [dimensions, setDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
   const refPhoto = useRef<null | HTMLImageElement>(null);
   const [srcPhoto, setSrcPhoto] = useState<string>("");
   const steps = useContext(StepsContext);
@@ -48,6 +52,11 @@ export const Capture = () => {
       refVideo.current?.videoWidth as number,
       refVideo.current?.videoHeight as number
     );
+    setDimensions({
+      width: refVideo.current?.videoWidth as number,
+      height: refVideo.current?.videoHeight as number,
+    });
+    console.log(dimensions);
     const data = refPicture.current?.toDataURL();
     refPhoto.current?.setAttribute("src", data as string);
     setSrcPhoto(data as string);
@@ -122,7 +131,7 @@ export const Capture = () => {
         }}
       >
         <canvas
-          width={800}
+          width={640}
           height={480}
           style={{
             display: `${!refPicture.current ? "block" : "none"}`,
