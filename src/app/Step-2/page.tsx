@@ -13,6 +13,7 @@ export default function Step2() {
   }
   return (
     <main
+      style={{ background: `${steps.bgBlue ? "#0E1C32" : ""}` }}
       className={!steps.permission ? styles.Main : styles.MainContentMobile}
     >
       <Capture />

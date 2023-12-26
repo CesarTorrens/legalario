@@ -4,17 +4,28 @@ import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./step3.module.sass";
 import { StepsContext } from "app/context/stepsContext";
 import { useContext } from "react";
+import Input from "@mui/joy/Input";
 
+const regex =
+  /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}/;
 export default function Step3() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [sendValue, setSendValue] = useState(true);
   const steps = useContext(StepsContext);
 
-  useEffect(() => {
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const sendDocument = () => {
+    setLoading(true);
+    setSendValue(false);
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-  }, []);
-
+  };
   const backToHome = (): void => {
     steps.clearData();
   };
@@ -24,6 +35,27 @@ export default function Step3() {
 
   return (
     <main className={styles.Main}>
+      {sendValue && (
+        <div className={styles.InputContainer}>
+          <p>Ingrese su correo para enviar su documento firmado.</p>
+          <Input
+            error={!regex.test(email)}
+            onChange={handleEmail}
+            sx={{
+              width: "300px",
+            }}
+            size="md"
+            placeholder="legalario@gmail.com"
+          />
+          <button
+            disabled={!regex.test(email)}
+            onClick={sendDocument}
+            className={styles.buttonContinue}
+          >
+            Enviar
+          </button>
+        </div>
+      )}
       {loading && (
         <>
           <CircularProgress color="primary" />
@@ -53,7 +85,7 @@ export default function Step3() {
           </div>
         </>
       )}
-      {!loading && (
+      {!loading && !sendValue && (
         <>
           <svg
             width="42"

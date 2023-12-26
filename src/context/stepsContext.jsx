@@ -6,6 +6,7 @@ export const StepsContext = createContext();
 export const StepsProvider = ({ children }) => {
   const [stepsCount, setStepsCount] = useState(1);
   const [permission, setPermission] = useState(false);
+  const [bgBlue, setBgBlue] = useState(false);
 
   const router = useRouter();
 
@@ -16,6 +17,9 @@ export const StepsProvider = ({ children }) => {
     photoValue: "",
   });
   const TOTAL_STEPS = 3;
+  const handleBgBlue = () => {
+    setBgBlue(!bgBlue);
+  };
 
   const handlePermission = () => {
     setPermission(true);
@@ -50,7 +54,6 @@ export const StepsProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(data);
     if (
       data.photoValue &&
       data.pdfValue &&
@@ -83,6 +86,8 @@ export const StepsProvider = ({ children }) => {
         shouldRenderStep3: shouldRenderStep3,
         permission: permission,
         handlePermission: handlePermission,
+        bgBlue: bgBlue,
+        handleBgBlue: handleBgBlue,
       }}
     >
       {children}

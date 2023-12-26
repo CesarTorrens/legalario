@@ -14,9 +14,14 @@ import QRCode from "react-qr-code";
 
 export const Header = () => {
   const path = usePathname();
-  const { value, totalSteps, data, permission } = useContext(StepsContext);
+  const { value, totalSteps, data, permission, bgBlue } =
+    useContext(StepsContext);
+
   return (
-    <header className={!permission ? styles.Header : styles.HeaderMobile}>
+    <header
+      style={{ background: `${bgBlue ? "#0E1C32" : ""}` }}
+      className={!permission ? styles.Header : styles.HeaderMobile}
+    >
       <LogoOppo />
       <span className={styles.steepsText}>
         {`Paso ${value} de ${totalSteps}`}

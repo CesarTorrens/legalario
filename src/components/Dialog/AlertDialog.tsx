@@ -14,7 +14,6 @@ export const AlertDialog = (props: {
   const { open, handleClose } = props;
   const [politiesCheck, setPolitiesCheck] = React.useState(false);
   const steps = useContext(StepsContext);
-
   const handleSubmit = () => {
     if (politiesCheck) {
       steps.saveData("checkPolitiesValue", true);
