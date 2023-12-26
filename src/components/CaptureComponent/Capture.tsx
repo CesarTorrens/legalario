@@ -13,7 +13,6 @@ export const Capture = () => {
   const refPhoto = useRef<null | HTMLImageElement>(null);
   const [srcPhoto, setSrcPhoto] = useState<string>("");
   const steps = useContext(StepsContext);
-  console.log(steps.bgBlue);
   const handleSubmit = () => {
     if (srcPhoto) {
       steps.saveData("photoValue", srcPhoto);
@@ -36,9 +35,8 @@ export const Capture = () => {
       if (window.innerWidth <= 1120) {
         steps.handleBgBlue();
       }
-    } catch (error) {
-      alert(error);
-      console.log(error);
+    } catch (error: any) {
+      alert(error.message);
     }
   };
 
