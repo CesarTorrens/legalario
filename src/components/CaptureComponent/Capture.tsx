@@ -7,7 +7,6 @@ import { useContext } from "react";
 
 export const Capture = () => {
   const [permission, setPermission] = useState(false);
-  const [showCam, setShowCam] = useState<any>(null);
   const refVideo = useRef<null | HTMLVideoElement>(null);
   const refPicture = useRef<null | HTMLCanvasElement>(null);
   const refPhoto = useRef<null | HTMLImageElement>(null);

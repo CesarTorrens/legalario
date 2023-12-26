@@ -38,7 +38,11 @@ export const SignatureDialog = (props: {
           </DialogContent>
 
           <DialogActions className={styles.containerButtons}>
-            <button className={styles.buttonContinue} onClick={handleSubmit}>
+            <button
+              disabled={!signature}
+              className={styles.buttonContinue}
+              onClick={handleSubmit}
+            >
               Continuar
             </button>
           </DialogActions>

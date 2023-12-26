@@ -39,7 +39,7 @@ export default function Step3() {
         <div className={styles.InputContainer}>
           <p>Ingrese su correo para enviar su documento firmado.</p>
           <Input
-            error={!regex.test(email)}
+            error={email && !regex.test(email)}
             onChange={handleEmail}
             sx={{
               width: "300px",
