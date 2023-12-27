@@ -43,11 +43,7 @@ export const Header = () => {
           <Menu>
             <MenuItem>
               <QRCode
-                value={`http://localhost:3000?pdfValue=${
-                  data.pdfValue
-                }&signatureValue=${!!data.signatureValue}&checkPolitiesValue=${
-                  data.checkPolitiesValue
-                }&photoValue=${!!data.photoValue}`}
+                value={`https://legalario-git-master-cesartorrens.vercel.app/`}
               />
             </MenuItem>
           </Menu>
