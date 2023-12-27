@@ -69,6 +69,7 @@ export const StepsProvider = ({ children }) => {
       router.push("/Step-2");
       return;
     }
+    setStepsCount(1);
     router.push("/");
   }, [data]);
 
