@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import styles from "./step3.module.sass";
 import { StepsContext } from "app/context/stepsContext";
@@ -18,9 +18,7 @@ export default function Step3() {
     setEmail(e.target.value);
   };
 
-  const validate = () => {
-    return !email && regex.test(email);
-  };
+  const validate = !email ? true : email && regex.test(email);
 
   const sendDocument = () => {
     setLoading(true);

@@ -12,6 +12,14 @@ export const Capture = () => {
   const refPhoto = useRef<null | HTMLImageElement>(null);
   const [srcPhoto, setSrcPhoto] = useState<string>("");
   const steps = useContext(StepsContext);
+
+  useEffect(() => {
+    if (window.innerWidth <= 1120 && permission && srcPhoto) {
+      console.log(steps.bgBlue);
+      steps.handleBgBlue();
+    }
+  }, [srcPhoto]);
+
   const handleSubmit = () => {
     if (srcPhoto) {
       steps.saveData("photoValue", srcPhoto);
@@ -51,12 +59,12 @@ export const Capture = () => {
     const data = refPicture.current?.toDataURL();
     refPhoto.current?.setAttribute("src", data as string);
     setSrcPhoto(data as string);
-    if (window.innerWidth <= 1120) {
-      steps.handleBgBlue();
-    }
   };
 
   const takeNewPicture = () => {
+    if (window.innerWidth <= 1120) {
+      steps.handleBgBlue();
+    }
     setSrcPhoto("");
   };
 
@@ -155,7 +163,7 @@ export const Capture = () => {
       )}
       {permission && !srcPhoto && (
         <>
-          {!steps.bgBlue && (
+          {!steps.bgBlue && window.innerWidth >= 1120 && (
             <button onClick={takePicture} className={styles.buttonContinue}>
               <svg
                 width="22"
