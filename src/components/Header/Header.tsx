@@ -3,7 +3,6 @@ import { GloboIcon } from "app/Icons/GloboIcon";
 import { QRIcon } from "app/Icons/QRIcon";
 import { LogoOppo } from "../LogoOppo/LogoOppo";
 import styles from "./Header.module.sass";
-import { usePathname } from "next/navigation";
 import { StepsContext } from "app/context/stepsContext";
 import { useContext } from "react";
 import Menu from "@mui/joy/Menu";
@@ -13,7 +12,6 @@ import Dropdown from "@mui/joy/Dropdown";
 import QRCode from "react-qr-code";
 
 export const Header = () => {
-  const path = usePathname();
   const { value, totalSteps, data, permission, bgBlue } =
     useContext(StepsContext);
 

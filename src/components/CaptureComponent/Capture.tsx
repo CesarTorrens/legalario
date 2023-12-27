@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import styles from "./capture.module.sass";
 import { StepsContext } from "app/context/stepsContext";
@@ -9,10 +9,6 @@ export const Capture = () => {
   const [permission, setPermission] = useState(false);
   const refVideo = useRef<null | HTMLVideoElement>(null);
   const refPicture = useRef<null | HTMLCanvasElement>(null);
-  const [dimensions, setDimensions] = useState({
-    width: 0,
-    height: 0,
-  });
   const refPhoto = useRef<null | HTMLImageElement>(null);
   const [srcPhoto, setSrcPhoto] = useState<string>("");
   const steps = useContext(StepsContext);
@@ -21,7 +17,6 @@ export const Capture = () => {
       steps.saveData("photoValue", srcPhoto);
     }
   };
-
   const handlePermission = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -52,15 +47,10 @@ export const Capture = () => {
       refVideo.current?.videoWidth as number,
       refVideo.current?.videoHeight as number
     );
-    setDimensions({
-      width: refVideo.current?.videoWidth as number,
-      height: refVideo.current?.videoHeight as number,
-    });
 
     const data = refPicture.current?.toDataURL();
     refPhoto.current?.setAttribute("src", data as string);
     setSrcPhoto(data as string);
-    console.log(srcPhoto);
     if (window.innerWidth <= 1120) {
       steps.handleBgBlue();
     }
@@ -68,9 +58,6 @@ export const Capture = () => {
 
   const takeNewPicture = () => {
     setSrcPhoto("");
-    if (window.innerWidth <= 1120) {
-      steps.handleBgBlue();
-    }
   };
 
   return (
@@ -128,19 +115,19 @@ export const Capture = () => {
       </div>
       <div
         style={{
-          display: `${
-            permission && srcPhoto && dimensions.width ? "block" : "none"
-          }`,
+          display: `${permission && srcPhoto ? "block" : "none"}`,
         }}
       >
-        <canvas
-          width={dimensions.width}
-          height={dimensions.height}
-          style={{
-            display: `${!refPicture.current ? "block" : "none"}`,
-          }}
-          ref={refPicture}
-        ></canvas>
+        {refVideo.current?.videoWidth && (
+          <canvas
+            width={refVideo.current.videoWidth}
+            height={refVideo.current.videoHeight}
+            style={{
+              display: `${!refPicture.current ? "block" : "none"}`,
+            }}
+            ref={refPicture}
+          ></canvas>
+        )}
         <div
           style={{
             display: `${permission && srcPhoto ? "block" : "none"}`,

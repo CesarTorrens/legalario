@@ -11,7 +11,6 @@ const regex =
 export default function Step3() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
   const [sendValue, setSendValue] = useState(true);
   const steps = useContext(StepsContext);
 

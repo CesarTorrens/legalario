@@ -23,6 +23,10 @@ export function InputFile() {
   const [pdf, setPdf] = React.useState<string | null>();
 
   const uploadPdf = (e: any) => {
+    if (e.target.files[0].type !== "application/pdf") {
+      alert("Debe ingresar un archivo PDF");
+      return;
+    }
     if (e.target.files[0]) {
       const pdfData = e.target.files[0];
       const url = URL.createObjectURL(pdfData);
